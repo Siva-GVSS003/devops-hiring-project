@@ -18,3 +18,8 @@ node_modules/
 # OS
 .DS_Store
 Thumbs.db
+
+*.tfvars
+*.tfstate
+*.tfstate.*
+.terraform/
