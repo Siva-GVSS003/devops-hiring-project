@@ -23,7 +23,15 @@ resource "aws_db_instance" "postgres" {
   multi_az = false
 
   storage_encrypted = true
+ 
+  enabled_cloudwatch_logs_exports = [
+    "postgresql"
+  ]
+  
 
+  performance_insights_enabled = true
+
+  performance_insights_retention_period = 7
 
   backup_retention_period = 7
 
@@ -32,6 +40,8 @@ resource "aws_db_instance" "postgres" {
   maintenance_window = "Sun:04:00-Sun:05:00"
 
   deletion_protection = false
+
+  copy_tags_to_snapshot = true
 
   skip_final_snapshot = true
 

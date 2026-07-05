@@ -18,3 +18,7 @@ output "secret_name" {
 output "database_name" {
   value = aws_db_instance.postgres.db_name
 }
+
+output "rds_identifier" {
+  value = aws_db_instance.postgres.identifier
+}

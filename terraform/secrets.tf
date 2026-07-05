@@ -23,6 +23,7 @@ resource "aws_secretsmanager_secret_version" "postgres_secret_value" {
 
     port = 5432
 
+    database = "crud_api_db"
   })
 
 }
