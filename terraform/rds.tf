@@ -2,7 +2,7 @@ resource "aws_db_instance" "postgres" {
 
   identifier = "${var.project_name}-postgres"
 
-  engine         = "postgres"
+  engine = "postgres"
   #engine_version = "17"
 
   instance_class = "db.t3.micro"
@@ -23,11 +23,11 @@ resource "aws_db_instance" "postgres" {
   multi_az = false
 
   storage_encrypted = true
- 
+
   enabled_cloudwatch_logs_exports = [
     "postgresql"
   ]
-  
+
 
   performance_insights_enabled = true
 

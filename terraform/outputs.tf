@@ -22,3 +22,8 @@ output "database_name" {
 output "rds_identifier" {
   value = aws_db_instance.postgres.identifier
 }
+
+
+output "elastic_ip" {
+  value = aws_eip.devops_server.public_ip
+}
