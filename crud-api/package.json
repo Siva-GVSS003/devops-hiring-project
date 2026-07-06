@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": { 
+  "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js"
   },
@@ -12,8 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.1693.0",
+    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "helmet": "^8.2.0",
+    "morgan": "^1.11.0",
     "pg": "^8.22.0"
   },
   "devDependencies": {
