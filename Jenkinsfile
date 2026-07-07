@@ -57,8 +57,14 @@ pipeline {
                 --name crud-api \
                 --restart unless-stopped \
                 -p 3000:3000 \
+		-e AWS_REGION=$AWS_REGION \
+		-e SECRET_NAME=devops-hiring-project-postgres-secret \
                 $IMAGE:latest
-                '''
+	        sleep 10
+
+                docker ps -a
+
+                docker logs crud-api --tail 50                '''
             }
         }
 
