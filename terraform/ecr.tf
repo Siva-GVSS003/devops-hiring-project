@@ -14,3 +14,12 @@ resource "aws_ecr_repository" "crud_api" {
     ManagedBy   = "Terraform"
   }
 }
+
+ resource "aws_ecr_repository" "multi_auth" {
+  name                 = "multi-auth"
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+}
