@@ -117,7 +117,7 @@ pipeline {
                 sh '''
                 echo "Waiting for applications..."
 
-                sleep 20
+                sleep 30
 
                 ##################################################
                 # CRUD API
@@ -135,7 +135,7 @@ pipeline {
                 # MULTI AUTH
                 ##################################################
 
-                AUTH_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:4000/auth/profile)
+                AUTH_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:4000/health)
 
                 if [ "$AUTH_STATUS" != "401" ]; then
                     echo "Multi Auth Health Check Failed"
