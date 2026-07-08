@@ -1,6 +1,7 @@
 pipeline {
     agent any
 
+  
     environment {
         AWS_REGION = "ap-south-2"
         ACCOUNT_ID = "649170435015"
@@ -114,39 +115,41 @@ pipeline {
 
         stage('Health Check') {
             steps {
-                sh '''
-                echo "Waiting for applications..."
+            sh '''
+            echo "Waiting for applications..."
 
-                sleep 30
+            sleep 30
 
-                ##################################################
-                # CRUD API
-                ##################################################
+            ##################################################
+            # CRUD API
+            ##################################################
 
-                CRUD_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/health)
+            CRUD_STATUS=$(curl -k -s -o /dev/null -w "%{http_code}" https://api.sivatech.store/health)
 
-                if [ "$CRUD_STATUS" != "200" ]; then
-                    echo "CRUD API Health Check Failed"
-                    docker logs crud-api --tail 50
-                    exit 1
-                fi
+            if [ "$CRUD_STATUS" != "200" ]; then
+                echo "CRUD API Health Check Failed"
+                docker logs crud-api --tail 50
+                exit 1
+            fi
 
-                ##################################################
-                # MULTI AUTH
-                ##################################################
+            ##################################################
+            # MULTI AUTH
+            ##################################################
 
-                AUTH_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:4000/health)
+            AUTH_STATUS=$(curl -k -s -o /dev/null -w "%{http_code}" https://auth.sivatech.store/health)
 
-                if [ "$AUTH_STATUS" != "401" ]; then
-                    echo "Multi Auth Health Check Failed"
-                    docker logs multi-auth --tail 50
-                    exit 1
-                fi
+            if [ "$AUTH_STATUS" != "200" ]; then
+                echo "Multi Auth Health Check Failed"
+                docker logs multi-auth --tail 50
+                exit 1
+            fi
 
-                echo "Both applications are healthy."
-                '''
+            echo "Both applications are healthy."
+            '''
             }
-        }
+    }
+        
+
 
     }
 
